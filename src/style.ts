@@ -29,6 +29,7 @@ export const UserSearch = styled.div`
     color: white;
     font-size: 22px;
     margin-bottom: 30px;
+    font-weight: 200;
   }
 
   input {
