@@ -7,7 +7,7 @@ import { Button } from "../../components/UI/button";
 
 const SearchPage = () => {
   const [name, setName] = useState<string>("");
-  const { loading, fetchData } = useData();
+  const { loading, fetchUserData } = useData();
 
   return (
     <Css.Container>
@@ -24,7 +24,7 @@ const SearchPage = () => {
         />
         <Button
           onClick={() => {
-            fetchData(name);
+            fetchUserData(name);
           }}
           disabled={loading}
         >

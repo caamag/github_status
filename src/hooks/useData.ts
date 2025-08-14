@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getUserData } from "../service/github";
+import { getUserData, getRepos } from "../service/github";
 import { useUser } from "../context/UserContext";
 import { toast } from "react-toastify";
 
@@ -7,8 +7,9 @@ export const useData = () => {
   const { saveUser } = useUser();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [repos, setRepos] = useState();
 
-  const fetchData = async (userName: string) => {
+  const fetchUserData = async (userName: string) => {
     setLoading(true);
 
     try {
@@ -26,8 +27,24 @@ export const useData = () => {
     }
   };
 
+  const fetchRepos = async (userName: string) => {
+    setLoading(true);
+
+    try {
+      const response = await getRepos(userName);
+      setRepos(response.data);
+      toast.success("Dados encontrado com sucesso.");
+    } catch (error: any) {
+      toast.error("Erro inesperado. Tente novamente mais tarde.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
-    fetchData,
+    fetchUserData,
+    fetchRepos,
+    repos,
   };
 };
