@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getUserData } from "../service/github";
 import { useUser } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 export const useData = () => {
   const { saveUser } = useUser();
@@ -12,9 +13,14 @@ export const useData = () => {
 
     try {
       const response = await getUserData(userName);
+      toast.success("Usuário encontrado com sucesso.");
       saveUser(response.data);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.status === 404) {
+        toast.error("Usuário não localizado.");
+      } else {
+        toast.error("Erro inesperado. Favor tente novamente mais tarde.");
+      }
     } finally {
       setLoading(false);
     }
