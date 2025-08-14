@@ -1,22 +1,28 @@
 import { createContext, useState, useContext } from "react";
 import type { ReactNode } from "react";
+import type { UserProps } from "../@types/user";
 
 interface UserContextProps {
-  userName: string;
-  saveUserName: (value: string) => void;
+  gitUser: UserProps | undefined;
+  saveUser: (user: UserProps) => void;
+  resetUser: () => void;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [userName, setUserName] = useState<string>("");
+  const [gitUser, setGitUser] = useState<UserProps | undefined>();
 
-  const saveUserName = (name: string) => {
-    setUserName(name);
+  const saveUser = (user: UserProps) => {
+    setGitUser(user);
+  };
+
+  const resetUser = () => {
+    setGitUser(undefined);
   };
 
   return (
-    <UserContext.Provider value={{ userName, saveUserName }}>
+    <UserContext.Provider value={{ gitUser, saveUser, resetUser }}>
       {children}
     </UserContext.Provider>
   );

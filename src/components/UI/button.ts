@@ -13,4 +13,9 @@ export const Button = styled.button`
     padding: 10px 50px;
     background-color: rgba(62, 9, 112, 1);
   }
+
+  &:disabled {
+    background-color: ${Colors.gray};
+    padding: 10px 40px !important;
+  }
 `;
