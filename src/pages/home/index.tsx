@@ -1,12 +1,29 @@
 import * as Css from "./style";
 
 //components
-import Loader from "../../components/loader";
+import Header from "../../components/header";
 
 const HomePage = () => {
-  return <Loader />;
+  return (
+    <Css.Container>
+      <Header />
+      <Css.Content>
+        <Css.SectionData>
+          <h2>Dados Da conta:</h2>
+          <br />
+          <Css.CardsContainer>
+            <Css.Card></Css.Card>
+            <Css.Card></Css.Card>
+            <Css.Card></Css.Card>
+            <Css.Card></Css.Card>
+            <Css.Card></Css.Card>
+          </Css.CardsContainer>
+        </Css.SectionData>
 
-  return <Css.HomeContainer>Home</Css.HomeContainer>;
+        <Css.PieChart></Css.PieChart>
+      </Css.Content>
+    </Css.Container>
+  );
 };
 
 export default HomePage;
